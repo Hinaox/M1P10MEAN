@@ -16,3 +16,11 @@ db.user.insertMany([
   { '_id': 2, 'name': 'bray' },
 ]);
 
+db.example.insertMany([
+  {
+    title: 'Example Title',
+    content: 'Example Content',
+    date: '2022-01-15T12:00:00.000Z'
+  }
+]);
+
