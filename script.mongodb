@@ -8,19 +8,10 @@ use('M1P10MEAN');
 
 // The drop() command destroys all data from a collection.
 // Make sure you run it against the correct database and collection.
-db.user.drop();
+db.users.drop();
 
 // Insert a few documents into the user collection.
-db.user.insertMany([
+db.users.insertMany([
   { '_id': 1, 'name': 'hiaro' },
   { '_id': 2, 'name': 'bray' },
 ]);
-
-db.example.insertMany([
-  {
-    title: 'Example Title',
-    content: 'Example Content',
-    date: '2022-01-15T12:00:00.000Z'
-  }
-]);
-

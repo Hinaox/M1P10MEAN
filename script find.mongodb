@@ -1,3 +1,1 @@
-db.user.find({});
-
-// db.user.find({ '_id': 1, 'name': 'hiaro' });
+db.users.find({ 'name': 'hiaro' });
