@@ -72,15 +72,3 @@ router.get('/', (req, res, next) => {
       });
     });
 });
-
-// const userSchema = new mongoose.Schema({
-//   _id: Number,
-//   name: String
-// });
-
-// const User = mongoose.model('user', userSchema);
-
-// User.find({ name: 'hiaro' }, (err, res) => {
-//   if (err) console.log(err);
-//   console.log(res);
-// });

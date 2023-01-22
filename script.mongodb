@@ -1,17 +1,43 @@
-// MongoDB Playground
-// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
-// Make sure you are connected to enable completions and to be able to run a playground.
-// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
-
-// Select the database to use.
 use('M1P10MEAN');
 
-// The drop() command destroys all data from a collection.
-// Make sure you run it against the correct database and collection.
-db.users.drop();
+// db.utilisateurs.drop();
+// db.utilisateurs.insertMany([
+//     {
+//         "nom": "Andria Bryan",
+//         "email": "mahefaran48@gmail.com",
+//         "motDePasse": "bryan",
+//         "profil": "client",
+//     },
+//     {
+//         "nom": "Hiaro Natha",
+//         "email": "mahefaran48@gmail.com",
+//         "motDePasse": "bryan",
+//         "profil": "client",
+//     },
+//     {
+//         "nom": "Jean Yves",
+//         "email": "jean@mail.com",
+//         "motDePasse": "bryan",
+//         "profil": "atelier",
+//     },
+//     {
+//         "nom": "Rakoto Grand",
+//         "email": "rakoto@mail.com",
+//         "motDePasse": "bryan",
+//         "profil": "financier",
+//     },
+// ])
 
-// Insert a few documents into the user collection.
-db.users.insertMany([
-  { '_id': 1, 'name': 'hiaro' },
-  { '_id': 2, 'name': 'bray' },
-]);
+// db.voitures.drop();
+// db.voitures.insertMany(
+//     [
+//         {
+//             "_id":"1",
+//             "marque": "Renault",
+//             "modele": "Clio",
+//             "immatriculation": "9826 TAA",
+//         }
+//     ]
+// )
+
+// db.users.find({ 'name': 'hiaro' });

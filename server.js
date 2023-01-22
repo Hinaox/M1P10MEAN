@@ -1,10 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose');
-const router = express.Router();
 
 mongoose.set('strictQuery',false);
-mongoose.connect('mongodb+srv://M1P10MEAN:mdpsimple@m1p10mean.b3kaviz.mongodb.net/M1P10MEAN')
+module.exports = mongoose.connect('mongodb+srv://M1P10MEAN:mdpsimple@m1p10mean.b3kaviz.mongodb.net/M1P10MEAN')
   .then(() => {
     console.log('Connected!')
   })
@@ -19,3 +18,4 @@ app.use(cors({
 app.listen(port, () => {
     console.log(`Server started on port ${port}`)
 })
+
