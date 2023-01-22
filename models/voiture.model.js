@@ -12,10 +12,10 @@ const carSchema = new Schema({
     },
     utilisateur: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Utilisateurs'
+      ref: 'Utilisateur'
     },
 });
 
 mongoose.set('useFindAndModify', false);
-module.exports = mongoose.model('Voitures', carSchema);
+module.exports = mongoose.model('Voiture', carSchema);
   

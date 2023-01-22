@@ -9,4 +9,4 @@ const userSchema = new Schema({
 });
 
 mongoose.set('useFindAndModify', false);
-module.exports = mongoose.model('Utilisateurs', userSchema);
+module.exports = mongoose.model('Utilisateur', userSchema);
