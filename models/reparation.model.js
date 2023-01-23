@@ -10,7 +10,7 @@ const reparationSchema = new Schema({
     {
       description:{ type:String, required:true},
       montant: { type:Number, required:true, decimals:2 },
-      statut: { type: String, required: true, enum: ["Non réparé", "En cours", "Fini"] }
+      statut: { type: String, required: true, enum: ["StandBy", "En cours", "Fini"] }
     }
     // tsy mila date de tsy mila details momban piece fa atao anady description
   ], 
