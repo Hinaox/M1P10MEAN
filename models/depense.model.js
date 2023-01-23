@@ -19,5 +19,4 @@ const depenseSchema = new Schema({
     }
 });
 
-mongoose.set('useFindAndModify', false);
 module.exports = mongoose.model("Depense", depenseSchema);

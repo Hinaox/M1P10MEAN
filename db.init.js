@@ -1,7 +1,7 @@
 const utilisateur = require("./models/utilisateur.model");
 const voiture = require("./models/voiture.model");
 const reparation = require("./models/reparation.model");
-// const depense = require("./models/depense.model");
+const depense = require("./models/depense.model");
 
 utilisateur.deleteMany({}).then(()=>{
   utilisateur.insertMany([
@@ -40,6 +40,7 @@ utilisateur.deleteMany({}).then(()=>{
         modele: "Clio",
         immatriculation: "3489 TAA",
         utilisateur: res._id,
+        statut: 'Disponible'
       }
     });
     utilisateur.findOne({nom:"Hiaro Natha"}, (err, res) => {
@@ -49,28 +50,32 @@ utilisateur.deleteMany({}).then(()=>{
         modele: "Megane",
         immatriculation: "1111 TAA",
         utilisateur: res._id,
+        statut: 'Disponible'
       };
       c = {
         marque: "Peaugeot",
         modele: "405",
         immatriculation: "2222 TAA",
         utilisateur: res._id,
+        statut: 'Disponible'
       }
     });
 
-    voiture.deleteMany({}).then(function(){
-      voiture.insertMany([a,b,c])
-      .then(function () {
-        console.log("Voitures inserted"); // Success
-        test();
-      })
-      .catch(function (error) {
-        console.log(error); // Failure
-      });  
-    }).catch(function(error){
-      console.log(error);
-    });
-
+    setTimeout(
+      () => { voiture.deleteMany({}).then(function(){
+        voiture.insertMany([a,b,c])
+        .then(function () {
+          console.log("Voitures inserted"); // Success
+          test();
+        })
+        .catch(function (error) {
+          console.log(error); // Failure
+        });  
+      }).catch(function(error){
+        console.log(error);
+      }) 
+    }, 1000 );
+    
   })
   .catch(function (error) {
     console.log(error); // Failure
@@ -91,39 +96,35 @@ test = async function() {
   });
 }
 
-// test2 = async function() {
-//   // GET child from parent
-// }
-
 insertR = async function(idV) {
-  reparation.deleteMany({})
-  .then(function(){
-    reparation.insertMany([
-      {
-        voiture:idV,
-        statuts: [{nom:"En cours de reparation", date:Date.now()}],
-        details: [
-          {piece:"Carroserie", montant:500 , statut: 'En cours de reparation', description: 'il ne reste plus que le pare choc avant'},
-          {piece:"Boite de vitesse", montant:5500 , statut: 'Non reparé', description: ''},
-        ],
-        description:"...desc..."
-      },
-    ])
-    .then(function () {
-      console.log("Reparations inserted"); // Success
-      reparation.find({}).populate('voiture').exec((err, user) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(user);
-            console.log('en JSON = '+JSON.stringify(user));
-        }
-      });
-    })
-    .catch(function (error) {
-      console.log(error); // Failure
-    });  
-  }).catch(function(error){
-    console.log(error);
-  });
+  // reparation.deleteMany({})
+  // .then(function(){
+  //   reparation.insertMany([
+  //     {
+  //       voiture:idV,
+  //       statuts: [{nom:"En cours de reparation", date:Date.now()}],
+  //       details: [
+  //         {piece:"Carroserie", montant:500 , statut: 'En cours de reparation', description: 'il ne reste plus que le pare choc avant'},
+  //         {piece:"Boite de vitesse", montant:5500 , statut: 'Non reparé', description: ''},
+  //       ],
+  //       description:"...desc..."
+  //     },
+  //   ])
+  //   .then(function () {
+  //     console.log("Reparations inserted"); // Success
+  //     reparation.find({}).populate('voiture').exec((err, user) => {
+  //       if (err) {
+  //           console.log(err);
+  //       } else {
+  //           console.log(user);
+  //           console.log('en JSON = '+JSON.stringify(user));
+  //       }
+  //     });
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error); // Failure
+  //   });  
+  // }).catch(function(error){
+  //   console.log(error);
+  // });
 }

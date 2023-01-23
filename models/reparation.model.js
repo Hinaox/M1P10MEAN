@@ -20,5 +20,4 @@ const reparationSchema = new Schema({
   paye: {type: String, required: false, enum: ["Non","OK"]}
 });
 
-mongoose.set('useFindAndModify', false);
 module.exports = mongoose.model("Reparation", reparationSchema);

@@ -9,6 +9,12 @@ class VoitureService {
         } catch (err) {
             throw err;
         }
+exports.create = (req, res) => {
+    // Validate request
+    if(!req.body) {
+        return res.status(400).send({
+            message: "Voiture content can not be empty"
+        });
     }
 
     // Retrieve all voitures
@@ -60,3 +66,27 @@ class VoitureService {
 }
 
 module.exports = VoitureService;
+    // Save voiture in the database
+    voiture.save()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the voiture."
+        });
+    });
+};
+
+// exports.findMyCars = (req, res) => {
+
+// };
+
+exports.findAllCars = (req,res) => {
+    Voiture.find({}).populate('utilisateur').exec((err, user) => {
+    if (err) {
+        res.status(500).send(err);
+    } else {
+        res.status(200).send(user);
+    }
+});
+}

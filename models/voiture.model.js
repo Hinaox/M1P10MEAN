@@ -5,10 +5,10 @@ const carSchema = new Schema({
     marque: { type: String, required: true },
     modele: { type: String, required: true },
     immatriculation: { type: String, required: false },
-    status: {
+    statut: {
     type: String,
     required: true,
-      enum: ["disponible", "déposé", "en réparation", "réparé","prêt"]
+      enum: ["Disponible", "Déposé", "En réparation", "Réparé","Prêt"]
     },
     utilisateur: {
       type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +16,5 @@ const carSchema = new Schema({
     },
 });
 
-mongoose.set('useFindAndModify', false);
 module.exports = mongoose.model('Voiture', carSchema);
   

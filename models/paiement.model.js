@@ -17,5 +17,4 @@ const payementSchema = new Schema({
     }
 });
 
-mongoose.set('useFindAndModify', false);
-module.exports = mongoose.model('Utilisateurs', payementSchema);
+module.exports = mongoose.model('Paiements', payementSchema);
