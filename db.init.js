@@ -12,9 +12,9 @@ utilisateur.deleteMany({}).then(()=>{
       role: "client",
     },
     {
-      nom: "Hiaro Natha",
-      email: "mail48@gmail.com",
-      motDePasse: "bryan",
+      nom: "Hiaro Nathanael",
+      email: "Hiaro@gmail.com",
+      motDePasse: "mdp",
       role: "client",
     },
     {
