@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const reparationSchema = new Schema({
   voiture: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Voitures",
+    ref: "Reparation",
   },
   details: [
     {
@@ -19,6 +19,26 @@ const reparationSchema = new Schema({
   dateFin: { type: Date, required: false },//Date où le garagiste clic sur le boutton "Valider bon de sortie"
   paye: {type: String, required: false, enum: ["Non","OK"]}
 });
+
+reparationSchema.statics.ajoutDetail = async function(id, details) {
+  try {
+    const reparation = await this.findById(id);
+    reparation.details.push(details);
+    return await reparation.save();
+  } catch (err) {
+    throw err;
+  }
+}
+
+reparationSchema.statics.changeStatutPaiement = async function(id) {
+  try {
+    const reparation = await this.findById(id);
+    reparation.paye = "OK";
+    return await reparation.save();
+  } catch (err) {
+    throw err;
+  }
+}
 
 mongoose.set('useFindAndModify', false);
 module.exports = mongoose.model("Reparation", reparationSchema);

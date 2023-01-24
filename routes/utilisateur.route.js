@@ -48,8 +48,36 @@ router.post('/loginProcess', (req, res) => {
     });
 });
 
-router.post('/inscriptionProcess',(req,res) => {
-
+router.post('/inscriptionProcess', (req, res) => {
+    // hash password
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+        if (err) {
+            return res.status(500).json({
+                title: "Une erreur s'est produite",
+                error: err
+            });
+        }
+        // create new user with hashed password
+        const newUser = new User({
+            nom: req.body.nom,
+            email: req.body.email,
+            password: hash,
+            role: req.body.role
+        });
+        // save new user
+        newUser.save((err, result) => {
+            if (err) {
+                return res.status(500).json({
+                    title: "Une erreur s'est produite",
+                    error: err
+                });
+            }
+            res.status(201).json({
+                message: 'Utilisateur crée avec succès',
+                obj: result
+            });
+        });
+    });
 });
 
 
