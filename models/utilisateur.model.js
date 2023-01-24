@@ -8,5 +8,4 @@ const userSchema = new Schema({
     role: { type: String, required: true }
 });
 
-mongoose.set('useFindAndModify', false);
 module.exports = mongoose.model('Utilisateur', userSchema);

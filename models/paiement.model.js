@@ -7,7 +7,7 @@ const payementSchema = new Schema({
         ref: "Reparation",
     },
     montant: {
-        type: number,
+        type: Number,
         decimal : true,
         decimals:  2 
     },
@@ -17,5 +17,4 @@ const payementSchema = new Schema({
     }
 });
 
-mongoose.set('useFindAndModify', false);
-module.exports = mongoose.model('Utilisateurs', payementSchema);
+module.exports = mongoose.model('Paiements', payementSchema);

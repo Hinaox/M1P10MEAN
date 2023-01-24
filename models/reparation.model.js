@@ -10,14 +10,13 @@ const reparationSchema = new Schema({
     {
       description:{ type:String, required:true},
       montant: { type:Number, required:true, decimals:2 },
-      statut: { type: String, required: true, enum: ["StandBy", "En cours", "Fini"] }
+      statut: { type: String, required: true, enum: ["En attente", "En cours", "Fini"] }
     }
-    // tsy mila date de tsy mila details momban piece fa atao anady description
   ], 
   description: { type: String, required: false }, // description venant du client
-  dateDebut: { type: Date, required: false  },//Date où le garagiste clic sur le boutton "recevoir la voiture"
-  dateFin: { type: Date, required: false },//Date où le garagiste clic sur le boutton "Valider bon de sortie"
-  paye: {type: String, required: false, enum: ["Non","OK"]}
+  dateDebut: { type: Date, required: false  }, //Date où le garagiste clic sur le boutton "recevoir la voiture"
+  dateFin: { type: Date, required: false }, //Date où le garagiste clic sur le boutton "Valider bon de sortie"
+  paye: {type: Boolean, required: true}
 });
 
 reparationSchema.statics.ajoutDetail = async function(id, details) {
