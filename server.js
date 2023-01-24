@@ -1,7 +1,8 @@
 const express = require('express')
 const cors = require('cors')
+const voitureRouter = require('./routes/voiture.route');
+const userRouter = require('./routes/utilisateur.route');
 const mongoose = require('mongoose');
-const voitureRoutes = require('./routes/voiture.route');
 
 mongoose.set('strictQuery',false);
 module.exports = mongoose.connect('mongodb+srv://M1P10MEAN:mdpsimple@m1p10mean.b3kaviz.mongodb.net/M1P10MEAN')
@@ -17,7 +18,8 @@ app.use(cors({
   origin: 'http://localhost:4200'
 }))
 
-app.use('/voitures',voitureRoutes);
+app.use('/',voitureRouter);
+app.use('/',userRouter);
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`)

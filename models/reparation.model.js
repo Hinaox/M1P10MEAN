@@ -15,8 +15,8 @@ const reparationSchema = new Schema({
     // tsy mila date de tsy mila details momban piece fa atao anady description
   ], 
   description: { type: String, required: false }, // description venant du client
-  dateDebut: { type: Date, required: false  },//Date où le garagiste clic sur le boutton "recevoir la voiture"
-  dateFin: { type: Date, required: false },//Date où le garagiste clic sur le boutton "Valider bon de sortie"
+  dateDebut: { type: Date, required: false  }, //Date où le garagiste clic sur le boutton "recevoir la voiture"
+  dateFin: { type: Date, required: false }, //Date où le garagiste clic sur le boutton "Valider bon de sortie"
   paye: {type: String, required: false, enum: ["Non","OK"]}
 });
 

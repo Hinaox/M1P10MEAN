@@ -43,7 +43,7 @@ utilisateur.deleteMany({}).then(()=>{
         statut: 'Disponible'
       }
     });
-    utilisateur.findOne({nom:"Hiaro Natha"}, (err, res) => {
+    utilisateur.findOne({nom:"Hiaro Nathanael"}, (err, res) => {
       if (err) console.log(err);
       b = {
         marque: "Renault",
@@ -90,7 +90,7 @@ test = async function() {
     if (err) {
         console.log(err);
     } else {
-        console.log(user);
+        // console.log(user);
         insertR(user._id);
     }
   });
