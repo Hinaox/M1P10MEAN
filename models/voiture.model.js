@@ -28,6 +28,5 @@ carSchema.statics.changeStatus = async function (id, numStatus) {
   }
 };
 
-mongoose.set('useFindAndModify', false);
 module.exports = mongoose.model('Voiture', carSchema);
   

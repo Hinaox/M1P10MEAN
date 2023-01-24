@@ -39,5 +39,4 @@ reparationSchema.statics.changeStatutPaiement = async function(id) {
   }
 }
 
-mongoose.set('useFindAndModify', false);
 module.exports = mongoose.model("Reparation", reparationSchema);
