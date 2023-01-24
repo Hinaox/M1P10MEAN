@@ -8,7 +8,7 @@ const carSchema = new Schema({
     statut: {
     type: String,
     required: true,
-      enum: ["Disponible", "Déposé", "En réparation", "Réparé","Prêt"]
+      enum: ["Disponible","Déposé","En réparation","Réparé"]
     },
     utilisateur: {
       type: mongoose.Schema.Types.ObjectId,
