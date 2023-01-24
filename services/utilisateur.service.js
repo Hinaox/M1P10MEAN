@@ -1,9 +1,9 @@
-const User = require('../models/utilisateur.model');
+// const User = require('../models/utilisateur.model');
 
-module.export = findUser = async (nom) => {
-    return await User.find({ nom });
-}
+// module.export = findUser = async (nom) => {
+//     return await User.find({ nom });
+// }
 
-module.export = find = async () => {
-    return await User.find({},);
-}
+// module.export = find = async (callback) => {
+//     return await User.find({},callback);
+// }

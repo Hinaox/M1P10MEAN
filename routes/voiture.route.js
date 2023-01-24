@@ -1,7 +1,7 @@
 const express = require("express");
-const router = express.Router();
-
 const Voiture = require("../models/voiture.model");
+
+const router = express.Router();
 
 router.get("/voitures", (req, res) => {
   Voiture.find()
@@ -15,6 +15,16 @@ router.get("/voitures", (req, res) => {
     });
 });
 
+router.get("/utilisateur/voitures/:IdU", (req, res) => {
+  Voiture.find({ utilisateur: req.params.IdU }, (err, voiture) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send(err);
+    }
+    return res.status(200).send(voiture);
+  });
+});
+
 router.get("/voiture/:Id", (req, res) => {
   Voiture.findOne({ _id: req.params.Id })
     .populate("utilisateur")
@@ -22,7 +32,7 @@ router.get("/voiture/:Id", (req, res) => {
       if (err) {
         console.log(err);
         return res.status(500).send(err);
-      } 
+      }
       return res.status(200).send(voiture);
     });
 });
@@ -39,7 +49,7 @@ router.post("/voitures", (req, res) => {
     if (err) {
       console.log(err);
       return res.status(500).send(err);
-    } 
+    }
     return res.status(200).send(ret);
   });
 });
