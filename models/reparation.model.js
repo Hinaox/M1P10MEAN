@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const reparationSchema = new Schema({
   voiture: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Voitures",
+    ref: "Voiture",
   },
   details: [
     {

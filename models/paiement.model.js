@@ -7,7 +7,7 @@ const payementSchema = new Schema({
         ref: "Reparation",
     },
     montant: {
-        type: number,
+        type: Number,
         decimal : true,
         decimals:  2 
     },
