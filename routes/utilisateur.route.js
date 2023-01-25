@@ -81,13 +81,18 @@ router.post("/inscriptionProcess", (req, res) => {
 });
 
 router.get("/nom/:name", (req, res) => {
-  UserModel.findOne({ nom: req.params.name }, (err, voiture) => {
+  User.findOne({ nom: req.params.name }, (err, voiture) => {
     if (err) {
       console.log(err);
       return res.status(500).send(err);
     }
     return res.status(200).send(voiture);
   });
+});
+
+router.get("/test", (req, res) => {
+  console.log("test fini")
+  return res.status(200).send("test fini");
 });
 
 
