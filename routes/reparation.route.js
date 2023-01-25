@@ -4,7 +4,8 @@ const reparation = require("../models/reparation.model");
 const router = express.Router();
 
 router.get("/reparations", (req, res) => {
-  reparation.find()
+  reparation
+    .find()
     .populate("voiture")
     .exec((err, reparations) => {
       if (err) {
