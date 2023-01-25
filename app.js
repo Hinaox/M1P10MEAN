@@ -1,7 +1,10 @@
 // const init = require('./db.init.js')
 const server = require('./server.js')
 
+// ecris ici un code
+
 // const nodemailer = require("nodemailer");
+
 
 // // Créer un objet de transporteur SMTP
 // let transporter = nodemailer.createTransport({
