@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Reparation = require('path/to/reparation.model');
+const Reparation = require('../models/reparation.model');
 
 class ReparationService {
     // Create reparation

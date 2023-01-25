@@ -80,7 +80,7 @@ router.post("/inscriptionProcess", (req, res) => {
   });
 });
 
-router.get("/utilisateurs/nom/:name", (req, res) => {
+router.get("/nom/:name", (req, res) => {
   UserModel.findOne({ nom: req.params.name }, (err, voiture) => {
     if (err) {
       console.log(err);
