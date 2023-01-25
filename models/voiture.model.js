@@ -5,10 +5,10 @@ const carSchema = new Schema({
     marque: { type: String, required: true },
     modele: { type: String, required: true },
     immatriculation: { type: String, required: false },
-    statut: {
+    status: {
     type: String,
     required: true,
-      enum: ["Disponible","Déposé","En réparation","Réparé"]
+      enum: ["disponible", "déposé", "en réparation", "réparé","prêt"]
     },
     utilisateur: {
       type: mongoose.Schema.Types.ObjectId,
