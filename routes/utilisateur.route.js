@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 // import User service
-const User = require('../services/utilisateur.service');
+const User = require('../models/utilisateur.model');
 
 // create login route
 router.post('/loginProcess', (req, res) => {
@@ -20,26 +20,27 @@ router.post('/loginProcess', (req, res) => {
         if (!user) {
             return res.status(401).json({
                 title: 'Connexion échouée',
-                error: { message: 'Email ou Mot de passe érroné!' }
+                message: 'Email ou Mot de passe érroné!' 
             });
         }
         // compare the provided password with the hashed password in the database
         bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
             if (err) {
                 return res.status(500).json({
-                    title: 'An error occurred',
+                    title: "Une erreur s'est produite",
+                    message: "Erreur",
                     error: err
                 });
             }
             if (!isMatch) {
                 return res.status(401).json({
                     title: "Une erreur s'est produite",
-                    error: { message: 'Email ou Mot de passe érroné!' }
+                    message: 'Email ou Mot de passe érroné!' 
                 });
             }
             // create and assign a JSON web token
-            const token = jwt.sign({ userId: user._id }, 'secretkey', { expiresIn: 3600*24 });
-            res.status(200).json({
+          const token = jwt.sign({ userId: user._id, role: user.role }, 'secretkey', { expiresIn: 3600*24 });
+          return res.status(200).json({
                 message: 'Successfully logged in',
                 token: token,
                 userId: user._id
@@ -81,12 +82,12 @@ router.post("/inscriptionProcess", (req, res) => {
 });
 
 router.get("/nom/:name", (req, res) => {
-  User.findOne({ nom: req.params.name }, (err, voiture) => {
+  User.findOne({ nom: req.params.name }, (err, utilisateur) => {
     if (err) {
       console.log(err);
       return res.status(500).send(err);
     }
-    return res.status(200).send(voiture);
+    return res.status(200).send(utilisateur);
   });
 });
 
