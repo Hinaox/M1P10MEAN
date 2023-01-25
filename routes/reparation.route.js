@@ -1,11 +1,18 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const router = express.Router();
+const reparation = require('../services/reparation.service');
 
-const userSchema = new Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, required: true }
+router.get("/reparations", (req, res) => {
+  reparation
+    .find()
+    .populate("voiture")
+    .exec((err, reparations) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send(err);
+      }
+      return res.status(200).send(reparations);
+    });
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = router;
