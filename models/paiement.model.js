@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const payementSchema = new Schema({
+const paiementSchema = new Schema({
     reparation: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Reparation",
@@ -17,5 +17,5 @@ const payementSchema = new Schema({
     }
 });
 
-mongoose.set('useFindAndModify', false);
-module.exports = mongoose.model('Utilisateurs', payementSchema);
+
+module.exports = mongoose.model('paiement', paiementSchema);
