@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 const User = require("../services/utilisateur.service");
-const UserModel = require("../models/utilisateur.model");
+const UserModel = require("../src/models/utilisateur.model");
 
 // create login route
 router.post("/loginProcess", (req, res) => {

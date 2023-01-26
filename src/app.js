@@ -1,5 +1,5 @@
 // const init = require('./db.init.js')
-const server = require('./server.js')
+const server = require('../server.js')
 
 // ecris ici un code
 
