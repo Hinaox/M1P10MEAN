@@ -1,47 +1,25 @@
 // const init = require('./db.init.js')
 const server = require('./server.js')
 
-// ecris ici un code
-
-// const nodemailer = require("nodemailer");
+var SibApiV3Sdk = require('sib-api-v3-sdk');
 
 
-// // Créer un objet de transporteur SMTP
-// let transporter = nodemailer.createTransport({
-//   host: "smtp.example.com",
-//   port: 465,
-//   secure: true, // utiliser SSL
-//   auth: {
-//     user: "username",
-//     pass: "password"
-//   }
-// });
-
-// // Préparer l'objet d'email
-// let mailOptions = {
-//   from: '"John Doe" <john.doe@example.com>',
-//   to: "jane.doe@example.com",
-//   subject: "Hello",
-//   text: "Hello World!",
-//   html: "<b>Hello World!</b>"
-// };
-
-// // Envoyer l'e-mail
-// transporter.sendMail(mailOptions, (error, info) => {
-//   if (error) {
-//     return console.log(error);
-//   }
-//   console.log("E-mail envoyé: %s", info.messageId);
-// });
-
-// // Vérifier si l'e-mail a été envoyé avec succès
-// transporter.verify((error, success) => {
-// if (error) {
-// console.log(error);
-// } else {
-// console.log("Le serveur SMTP est prêt à envoyer des e-mails.");
-// }
-// });
-
-// // Pour finir, on peut utiliser la fonction close() pour fermer la connexion avec le serveur SMTP
-// transporter.close();
+var defaultClient = SibApiV3Sdk.ApiClient.instance;
+var apiKey = defaultClient.authentications['api-key'];
+apiKey.apiKey = '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';
+var apiInstance = new SibApiV3Sdk.EmailCampaignsApi();
+var emailCampaigns = new SibApiV3Sdk.CreateEmailCampaign();
+emailCampaigns.name = "Campaign sent via the API";
+emailCampaigns.subject = "My subject";
+emailCampaigns.sender = {"name": "From Bray", "email":"mahefaran331@gmail.com"};
+emailCampaigns.type = "classic";
+data = {
+    htmlContent: 'Congratulations! You successfully sent this example campaign via the Sendinblue API.',
+    recipients: {"email":"mahefaran48@gmail.com"},
+    scheduledAt: '2018-01-01 00:00:01'
+}
+apiInstance.createEmailCampaign(emailCampaigns).then(function(data) {
+console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+// console.error(error);
+});
