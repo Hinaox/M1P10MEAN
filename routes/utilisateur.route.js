@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.post("/loginProcess", (req, res) => {
       });
     }
     // compare the provided password with the hashed password in the database
-    bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+    brycpt.compare(req.body.password, user.password, (err, isMatch) => {
       if (err) {
         return res.status(500).json({
           title: "An error occurred",

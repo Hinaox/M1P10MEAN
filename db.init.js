@@ -94,6 +94,7 @@ async function init() {
     });
   const idV = await voiture.findOne({ immatriculation: "2222 TAA" }).exec();
   const idV2 = await voiture.findOne({ immatriculation: "1212 TAA" }).exec();
+  const idV3 = await voiture.findOne({ immatriculation: "1291 TAA" }).exec();
   await reparation
     .deleteMany({})
     .then(() => console.log("repairs deleted"))
@@ -106,7 +107,7 @@ async function init() {
           {
             description: "Changement de courroie de distribution",
             montant: 250,
-            statut: "En cours",
+            statut: "Fini",
           },
           {
             description: "Vidange d'huile",
@@ -115,8 +116,8 @@ async function init() {
           },
         ],
         description: "Voiture qui fait un bruit bizarre",
-        dateDebut: "2022-05-15T12:00:00.000Z",
-        dateFin: "2022-05-20T17:00:00.000Z",
+        dateDebut: "2023-05-15T12:00:00.000Z",
+        dateFin: "2023-05-20T17:00:00.000Z",
         paye: true,
       },
       {
@@ -130,11 +131,40 @@ async function init() {
           {
             description: "Remplacement des pneus",
             montant: 500,
-            statut: "En attente",
+            statut: "Fini",
+          },
+          {
+            description: "Changement des plaquettes de freins",
+            montant: 120,
+            statut: "Fini",
+          },
+          {
+            description: "Remplacement des amortisseurs avant",
+            montant: 300,
+            statut: "En cours",
           },
         ],
         description: "Voiture qui a des problèmes de freins",
-        dateDebut: "2022-05-20T12:00:00.000Z",
+        dateDebut: "2023-05-20T12:00:00.000Z",
+        dateFin: null,
+        paye: false,
+      },
+      {
+        voiture: idV3._id,
+        details: [
+          {
+            description: "Remplacement de la boîte de vitesse",
+            montant: 1500,
+            statut: "En attente",
+          },
+          {
+            description: "Révision générale",
+            montant: 800,
+            statut: "En attente",
+          },
+        ],
+        description: "Voiture qui a des problèmes de boîte de vitesse",
+        dateDebut: "2023-05-25T12:00:00.000Z",
         dateFin: null,
         paye: false,
       },
