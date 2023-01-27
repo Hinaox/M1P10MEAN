@@ -1,0 +1,29 @@
+{
+  "name": "map10mean-hiaro-bryan",
+  "version": "1.0.0",
+  "description": "link, username et password projet mongo atlas:\r mongodb+srv://M1P10MEAN:mdpsimple@m1p10mean.b3kaviz.mongodb.net/M1P10MEAN\r M1P10MEAN\r mdpsimple",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hinaox/M1P10MEAN.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hinaox/M1P10MEAN/issues"
+  },
+  "homepage": "https://github.com/Hinaox/M1P10MEAN#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.0",
+    "nodemailer": "^6.9.0",
+    "sendinblue-api": "^1.0.8"
+  }
+}
