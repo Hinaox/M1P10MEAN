@@ -1,7 +1,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const crypto = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 // import User service
@@ -28,61 +28,45 @@ router.post('/loginProcess', (req, res) => {
             });
         }
         // compare the provided password with the hashed password in the database
-      bcrypt.compare(req.body.mdp, user.motDePasse, (err, isMatch) => {
-            if (err) {
-                return res.status(500).json({
-                    title: "Une erreur s'est produite",
-                    message: "Erreur",
-                    error: err
-                });
-            }
-            if (!isMatch) {
-              console.log(isMatch+"test test");
-                return res.status(401).json({
-                    title: "Une erreur s'est produite",
-                    message: 'Email ou Mot de passe érroné!' 
-                });
-            }
-            // create and assign a JSON web token
-          const token = jwt.sign({ userId: user._id, role: user.role }, 'secretkey', { expiresIn: 3600*24 });
-          console.log("token:"+token);
-          return res.status(200).json({
-                message: 'Successfully logged in',
-                token: token,
-                userId: user._id
-            });
+      if (!compare(req.body.password, user.password)) {
+        return res.status(401).json({
+          title: "Mauvais mot de passe",
+          message: 'Email ou Mot de passe érroné!'
         });
+      }
+
+      const token = jwt.sign({ userId: user._id, role: user.role }, 'secretkey', { expiresIn: 3600 * 24 });
+
+      console.log("token:" + token);
+      return res.status(200).json({
+        message: 'Successfully logged in',
+        token: token,
+        idUser: user._id,
+        role: user.role
+      });
     });
 });
 
 router.post("/inscriptionProcess", (req, res) => {
   // hash password
-  bcrypt.hash(req.password, 10, (err, hash) => {
-    if (err) {
-      return res.status(500).json({
-        title: "Une erreur s'est produite",
-        error: err,
-      });
-    }
-    // create new user with hashed password
-    const newUser = new User({
-      nom: req.nom,
-      email: req.email,
-      password: hash,
-      role: req.role,
+  let hash = crypto.SHA256(req.body.mdp);
+  const newUser = new User({
+    nom: req.body.nom,
+    email: req.body.email,
+    motDePasse: hash,
+    role: 'client',
+  });
+  console.log(newUser);
+  newUser.save().then((user) => {
+    res.status(200).json({
+      message: "User created",
+      user: user,
+      message: "ok",
     });
-    // save new user
-    newUser.save((err, result) => {
-      if (err) {
-        return res.status(500).json({
-          title: "Une erreur s'est produite",
-          error: err,
-        });
-      }
-      res.status(201).json({
-        message: "Utilisateur crée avec succès",
-        obj: result,
-      });
+  }).catch((err) => {
+    res.status(500).json({
+      title: "Une erreur s'est produite",
+      error: err,
     });
   });
 });
@@ -102,6 +86,10 @@ router.post("/test", (req, res) => {
   console.log(req.body.email);
   return res.status(200).send("test fini");
 });
+
+const compare = (password1, password2) => {
+  return password2 === password1;
+};
 
 
 

@@ -1,7 +1,8 @@
-// const init = require('./db.init.js')
-const server = require('../server.js')
+//const init = require('./db.init.js')
+const server = require('./server.js')
 
 // ecris ici un code
+
 
 // const nodemailer = require("nodemailer");
 

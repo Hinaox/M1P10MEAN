@@ -1,5 +1,5 @@
 const express = require("express");
-const reparation = require("../src/models/reparation.model");
+const reparation = require("../models/reparation.model");
 
 const router = express.Router();
 

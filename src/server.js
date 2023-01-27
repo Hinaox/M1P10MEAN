@@ -1,5 +1,6 @@
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
+const init = require('./db.init.js');
 const mongoose = require('mongoose');
 const utilisateurRoute = require('./routes/utilisateur.route'); 
 const depenseRoute = require('./routes/depense.route'); 
@@ -26,3 +27,5 @@ app.listen(port, () => {
     console.log(`Server started on port ${port}`)
 })
 
+//console.log("init base");
+//init();
