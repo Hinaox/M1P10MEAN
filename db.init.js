@@ -19,7 +19,7 @@ async function init() {
       },
       {
         nom: "Hiaro Nathanael",
-        email: "Hiaro@gmail.com",
+        email: "b.andriamahefa@etechconsulting-mg.com",
         motDePasse: "mdp",
         role: "client",
       },

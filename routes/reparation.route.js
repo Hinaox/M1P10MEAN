@@ -1,5 +1,6 @@
 const express = require("express");
 const reparation = require("../models/reparation.model");
+const createReparation = require("../services/reparation.service");
 
 const router = express.Router();
 
@@ -32,5 +33,7 @@ router.post("/reparations", (req, res) => {
     return res.status(200).send(ret);
   });
 });
+
+// router.post("/reparation/depot/:_id", createReparation);
 
 module.exports = router;

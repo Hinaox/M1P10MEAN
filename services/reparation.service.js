@@ -1,71 +1,26 @@
-// const mongoose = require('mongoose');
-// const Reparation = require('path/to/reparation.model');
+const reparation = require("../models/reparation.model");
 
-// class ReparationService {
-//     // Create reparation
-//     static async create(reparation) {
-//         try {
-//             return await Reparation.create(reparation);
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
+module.exports = createReparation = async (req, res) => {
+  try {
+    console.log(req.body);
+    const carId = req.body._id;
+    const car = await Car.findById(carId);
+    if (!car) {
+      return res.status(404).send("Voiture introuvable");
+    }
+    // Modifier le statut de la voiture en "Déposé"
+    car.status = "Déposé";
+    await car.save();
 
-//     // Retrieve all reparations
-//     static async findAll() {
-//         try {
-//             return await Reparation.find({});
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
+    // Créer le document dans la collection des réparations
+    const reparation = await reparation.create({
+      voiture: carId,
+      paye: false,
+    });
 
-//     // Retrieve reparation by id
-//     static async findOne(id) {
-//         try {
-//             return await Reparation.findById(id);
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-
-//     // Update reparation by id
-//     static async update(id, data) {
-//         try {
-//             return await Reparation.findByIdAndUpdate(id, data, { new: true });
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-
-//     // Delete reparation by id
-//     static async delete(id) {
-//         try {
-//             return await Reparation.findByIdAndRemove(id);
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-
-//     static async ajoutDetail(id, details) {
-//         try {
-//             const reparation = await Reparation.findById(id);
-//             reparation.details.push(details);
-//             return await reparation.save();
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-
-//     static async changerStatutPaiement(id) {
-//         try {
-//             const reparation = await Reparation.findById(id);
-//             reparation.paye = "OK";
-//             return await reparation.save();
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-// }
-
-// module.exports = ReparationService;
+    return res.status(200).send(reparation);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send(err.message);
+  }
+};
