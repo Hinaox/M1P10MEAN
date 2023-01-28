@@ -50,30 +50,22 @@ module.exports = sortie = async (req, res) => {
     car.statut = "Disponible";
     await car.save();
     const data = {
-      sender: {
-        name: "Majestic garage",
-        email: "majestic.garage@gmail.com",
-      },
-      to: [
-        {
-          email: car.utilisateur.email,
-          name: car.utilisateur.nom,
-        },
-      ],
-      subject: "Voiture réparée",
-      htmlContent:
-        "<h4>Bonjour " +
-        car.utilisateur.nom +
-        ",</h4>" +
-        "<h4>Votre " +
-        car.marque +
-        " " +
-        car.modele +
-        " immatriculée " +
-        car.immatriculation +
-        " a été validé pour sortir du garage.</h4><h4>Cordialement.</h4>" +
-        "_____________________________________________________________________<br>" +
-        "Majestic Garage<br>Tél: +138297961372<br>Email: majestic.garage@gmail.com",
+        from: '"Majestic Garage" <majestic.garage@gmail.com>', 
+        to: car.utilisateur.email, 
+        subject: 'Voiture réparée', 
+        html:
+          "<h4>Bonjour " +
+          car.utilisateur.nom +
+          ",</h4>" +
+          "<h4>Votre " +
+          car.marque +
+          " " +
+          car.modele +
+          " immatriculée " +
+          car.immatriculation +
+          " a été validé pour sortir du garage.</h4><h4>Cordialement.</h4>" +
+          "_____________________________________________________________________<br>" +
+          "Majestic Garage<br>Tél: +138297961372<br>Email: majestic.garage@gmail.com",
     };
     await sendMail(data);
     return res.status(200).send(car);
