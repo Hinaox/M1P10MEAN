@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.put("/voitures/depot/:id", deposer);
 router.put("/voitures/sortie/:id", sortie);
+router.post("/voitures/reception/:id", reception);
 
 router.get("/voitures", (req, res) => {
   Voiture.find()
