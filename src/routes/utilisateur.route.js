@@ -28,7 +28,8 @@ router.post('/loginProcess', (req, res) => {
             });
         }
         // compare the provided password with the hashed password in the database
-      if (!compare(req.body.password, user.password)) {
+      console.log(compare(crypto.SHA256(req.body.mdp).toString(), user.motDePasse));
+      if (compare(crypto.SHA256(req.body.mdp).toString(), user.motDePasse) === false) {
         return res.status(401).json({
           title: "Mauvais mot de passe",
           message: 'Email ou Mot de passe érroné!'
@@ -39,7 +40,7 @@ router.post('/loginProcess', (req, res) => {
 
       console.log("token:" + token);
       return res.status(200).json({
-        message: 'Successfully logged in',
+        valide: 'Successfully logged in',
         token: token,
         idUser: user._id,
         role: user.role
@@ -47,9 +48,9 @@ router.post('/loginProcess', (req, res) => {
     });
 });
 
-router.post("/inscriptionProcess", (req, res) => {
+router.post("/registerProcess", (req, res) => {
   // hash password
-  let hash = crypto.SHA256(req.body.mdp);
+  let hash = crypto.SHA256(req.body.mdp).toString();
   const newUser = new User({
     nom: req.body.nom,
     email: req.body.email,
@@ -58,13 +59,12 @@ router.post("/inscriptionProcess", (req, res) => {
   });
   console.log(newUser);
   newUser.save().then((user) => {
-    res.status(200).json({
-      message: "User created",
-      user: user,
-      message: "ok",
+    return res.status(200).json({
+      registered: "User created",
+      message: "Vous avez bien été inscrit. Connectez-vous! ",
     });
   }).catch((err) => {
-    res.status(500).json({
+    return res.status(500).json({
       title: "Une erreur s'est produite",
       error: err,
     });
