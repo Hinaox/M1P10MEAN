@@ -1,0 +1,43 @@
+use('M1P10MEAN');
+
+// db.utilisateurs.drop();
+// db.utilisateurs.insertMany([
+//     {
+//         "nom": "Andria Bryan",
+//         "email": "mahefaran48@gmail.com",
+//         "motDePasse": "bryan",
+//         "profil": "client",
+//     },
+//     {
+//         "nom": "Hiaro Natha",
+//         "email": "mahefaran48@gmail.com",
+//         "motDePasse": "bryan",
+//         "profil": "client",
+//     },
+//     {
+//         "nom": "Jean Yves",
+//         "email": "jean@mail.com",
+//         "motDePasse": "bryan",
+//         "profil": "atelier",
+//     },
+//     {
+//         "nom": "Rakoto Grand",
+//         "email": "rakoto@mail.com",
+//         "motDePasse": "bryan",
+//         "profil": "financier",
+//     },
+// ])
+
+// db.voitures.drop();
+// db.voitures.insertMany(
+//     [
+//         {
+//             "_id":"1",
+//             "marque": "Renault",
+//             "modele": "Clio",
+//             "immatriculation": "9826 TAA",
+//         }
+//     ]
+// )
+
+// db.users.find({ 'name': 'hiaro' });

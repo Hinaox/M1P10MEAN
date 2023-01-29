@@ -1,3 +1,3 @@
-var server = require('./server');
+var server = require('./src/server');
 var route = require('./route');
-server.start(route.route);
+//server.use(route.route);
