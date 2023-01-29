@@ -55,14 +55,14 @@ async function init() {
         modele: "Clio",
         immatriculation: "3489 TAA",
         utilisateur: idHiaro._id,
-        statut: "Disponible",
+        statut: "Déposé",
       },
       {
         marque: "Renault",
         modele: "Duster",
         immatriculation: "2222 TAA",
         utilisateur: idHiaro._id,
-        statut: "Déposé",
+        statut: "En réparation",
       },
       {
         marque: "Peaugeot",
@@ -76,14 +76,14 @@ async function init() {
         modele: "Megane",
         immatriculation: "1291 TAA",
         utilisateur: idBray,
-        statut: "Disponible",
+        statut: "En réparation",
       },
       {
         marque: "Peaugeot",
         modele: "205",
         immatriculation: "1212 TAA",
         utilisateur: idBray,
-        statut: "En réparation",
+        statut: "Réparé",
       },
     ])
     .then(function () {

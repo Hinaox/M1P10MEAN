@@ -4,6 +4,9 @@ const createReparation = require("../services/reparation.service");
 
 const router = express.Router();
 
+router.post("/reparation/setDetailStatus", setDetailStatus);
+router.post("/reparation/addDetail", addDetail);
+
 router.get("/reparations", (req, res) => {
   reparation
     .find()
@@ -33,7 +36,5 @@ router.post("/reparations", (req, res) => {
     return res.status(200).send(ret);
   });
 });
-
-// router.post("/reparation/depot/:_id", createReparation);
 
 module.exports = router;

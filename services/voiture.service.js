@@ -1,6 +1,6 @@
 const utilisateurModel = require("../models/utilisateur.model");
 const Voiture = require("../models/voiture.model");
-const reparation = require("../services/reparation.service");
+const reparation = require("../models/reparation.model");
 const sendMail = require("./sendMail.service");
 
 module.exports = deposer = async (req, res) => {
@@ -8,7 +8,10 @@ module.exports = deposer = async (req, res) => {
     const carId = req.params.id.slice(3);
     const car = await Voiture.findById({ _id: carId });
     if (!car) {
-      return res.status(404).send("Voiture introuvable");
+      return res.status(500).send("Voiture introuvable");
+    }
+    if (car.statut != 'Disponible') {
+      return res.status(500).send("Statut invalide pour déposer la voiture");
     }
     car.statut = "Déposé";
     await car.save();
@@ -24,10 +27,10 @@ module.exports = reception = async (req, res) => {
     const car = await Voiture.findById({ _id: carId });
     const desc = req.body.description;
     if (!car) {
-      return res.status(404).send("Voiture introuvable");
+      return res.status(500).send("Voiture introuvable");
     }
     if (car.statut != "Déposé") {
-      return res.status(404).send("Voiture non déposé");
+      return res.status(500).send("Voiture non déposé");
     }
     rep = await createReparation(carId,desc);
     if (rep.description == 'error = error') 
@@ -45,9 +48,14 @@ module.exports = sortie = async (req, res) => {
       .populate("utilisateur")
       .exec();
     if (!car) {
-      return res.status(404).send("Voiture introuvable");
+      return res.status(500).send("Voiture introuvable");
     }
-    car.statut = "Disponible";
+    if (car.statut != 'En réparation')
+      rep.statuts(500).send('Statut voiture invalide');
+    car.statut = "Réparé";
+    const rep = await reparation.findOne({_id:req.body.id}).exec();
+    rep.dateFin = new Date();
+    await rep.save();
     await car.save();
     const data = {
         from: '"Majestic Garage" <majestic.garage@gmail.com>', 
