@@ -21,6 +21,24 @@ module.exports = deposer = async (req, res) => {
   }
 };
 
+module.exports = createV = async (req, res) => {
+  try {
+    console.log('reparation');
+    let reparation = await Voiture.create({
+      modele: req.body.modele,
+      marque: req.body.marque,
+      immatriculation: req.body.immatriculation,
+      utilisateur: req.body.utilisateur,
+      statut: req.body.statut
+    });
+    console.log(reparation);
+    return res.status(200).send(reparation);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send(err.message);
+  }
+};
+
 module.exports = reception = async (req, res) => {
   try {
     const carId = req.params.id.slice(3);
