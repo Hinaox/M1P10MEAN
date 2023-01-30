@@ -1,71 +1,60 @@
-// const mongoose = require('mongoose');
-// const Reparation = require('path/to/reparation.model');
+const repair = require("../models/reparation.model");
+const { exists } = require("../models/voiture.model");
 
-// class ReparationService {
-//     // Create reparation
-//     static async create(reparation) {
-//         try {
-//             return await Reparation.create(reparation);
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
+module.exports = createReparation = async (idV, desc) => {
+  try {
+    let reparation = await repair.create({
+      voiture: idV,
+      paye: false,
+      description: desc,
+      dateDebut: now()
+    });
+    console.log(reparation);
+    return reparation;
+  } catch (err) {
+    console.log(err.message);
+    return {
+      message: err.message,
+      description: "error = error",
+    };
+  }
+};
 
-//     // Retrieve all reparations
-//     static async findAll() {
-//         try {
-//             return await Reparation.find({});
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
+module.exports = addDetail = async (req, res) => {
+  try {
+    const rep = await repair
+      .findOne({ _id: req.body.id })
+      .populate("voiture")
+      .exec();
+    if (!rep) return res.status(500).send(`Voiture qui n'existe pas`);
+    rep.details.push({
+      description: req.body.description,
+      montant: req.body.montant,
+      statut: "En attente",
+    });
+    await rep.save();
+    return res.status(200).send(rep);
+  } catch (err) {
+    console.log(err.message);
+    return err.message;
+  }
+};
 
-//     // Retrieve reparation by id
-//     static async findOne(id) {
-//         try {
-//             return await Reparation.findById(id);
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-
-//     // Update reparation by id
-//     static async update(id, data) {
-//         try {
-//             return await Reparation.findByIdAndUpdate(id, data, { new: true });
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-
-//     // Delete reparation by id
-//     static async delete(id) {
-//         try {
-//             return await Reparation.findByIdAndRemove(id);
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-
-//     static async ajoutDetail(id, details) {
-//         try {
-//             const reparation = await Reparation.findById(id);
-//             reparation.details.push(details);
-//             return await reparation.save();
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-
-//     static async changerStatutPaiement(id) {
-//         try {
-//             const reparation = await Reparation.findById(id);
-//             reparation.paye = "OK";
-//             return await reparation.save();
-//         } catch (err) {
-//             throw err;
-//         }
-//     }
-// }
-
-// module.exports = ReparationService;
+module.exports = setDetailStatus = async (req, res) => {
+  try {
+    const rep = await repair
+      .findOne({ _id: req.body.id })
+      .populate("voiture")
+      .exec();
+    if (!rep) return res.status(500).send('Reparation inexistant');
+    let repToEdit = rep.details.filter((e) => e._id == req.body._id)[0];
+    repToEdit.statut = req.body.next;
+    let index = rep.details.map((e) => e._id).indexOf(req.body._id);
+    rep.details[index] = repToEdit;
+    await rep.save();
+    return res.status(200).send(rep);
+  } catch (err) {
+    console.log(err.message);
+    return err.message;
+  }
+};

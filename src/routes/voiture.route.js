@@ -1,7 +1,13 @@
 const express = require("express");
-const Voiture = require("../src/models/voiture.model");
+const Voiture = require("../models/voiture.model");
+const service = require("../services/voiture.service");
 
 const router = express.Router();
+
+router.put("/voitures/depot/:id", deposer);
+router.put("/voitures/sortie/:id", sortie);
+router.post("/voitures/add", createV);
+router.post("/voitures/reception/:id", reception);
 
 router.get("/voitures", (req, res) => {
   Voiture.find()
@@ -54,4 +60,4 @@ router.post("/voitures", (req, res) => {
   });
 });
 
-module.exports = router;
+module.exports = router

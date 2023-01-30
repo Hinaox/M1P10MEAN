@@ -1,7 +1,12 @@
-const mongoose = require('mongoose');
-const express = require('express');
+const express = require("express");
+const reparation = require("../models/reparation.model");
+const createReparation = require("../services/reparation.service");
+
 const router = express.Router();
 const reparation = require('../models/reparation.model');
+
+router.post("/reparation/setDetailStatus", setDetailStatus);
+router.post("/reparation/addDetail", addDetail);
 
 router.get("/reparations", (req, res) => {
   reparation

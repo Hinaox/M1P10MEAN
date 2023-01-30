@@ -1,17 +1,35 @@
-var http = require('http');
-var url = require('url');
+const express = require("express");
+const cors = require("cors");
+const voitureRouter = require("./routes/voiture.route");
+const userRouter = require("./routes/utilisateur.route");
+const repairRouter = require("./routes/reparation.route");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
-function start(route){
-    function onRequest(request,response){
-        console.log('Requête reçue');
-        var pathname = url.parse(request.url).pathname;
-        route(pathname);
-        response.writeHead(200,{"Content-Type": "text/plain"});
-        response.write("Hello World");
-        response.end();
-    }
-    http.createServer(onRequest).listen(8888);
-    console.log("Démarrage du serveur.")
-}
+mongoose.set("strictQuery", false);
+module.exports = mongoose
+  .connect(
+    "mongodb+srv://M1P10MEAN:mdpsimple@m1p10mean.b3kaviz.mongodb.net/M1P10MEAN"
+  )
+  .then(() => {
+    console.log("Connected!");
+  })
+  .catch((err) => console.log("Connection while connecting = " + err));
 
-exports.start = start; 
+const app = express();
+app.use(bodyParser.json());
+const port = 3000;
+
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+  })
+);
+
+app.use("/", voitureRouter);
+app.use("/", userRouter);
+app.use("/", repairRouter);
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
